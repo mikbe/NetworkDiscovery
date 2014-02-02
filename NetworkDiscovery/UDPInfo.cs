@@ -6,9 +6,9 @@ namespace NetworkDiscovery
 {
     public class UDPInfo
     {
-        private int     _port;
-        private string  _address;
-        private bool    _active;
+        protected int       _port;
+        protected string    _address;
+        protected bool      _active;
 
         public UDPInfo(int port, string address)
         {

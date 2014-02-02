@@ -36,9 +36,6 @@ namespace ExampleApp
             // This should not respond.
             discoverer1.Discover(discovered_Callback);
 
-            // Now it should respond
-
-            //discoverer1.Discover(discovered_Callback);
 
             Thread.Sleep(100);
         }
@@ -59,7 +56,7 @@ namespace ExampleApp
 
             for (int i = 0; i < 10; i++)
             {
-                talker.say(i.ToString());
+                talker.Say(i.ToString());
             }
             Thread.Sleep(100);
 

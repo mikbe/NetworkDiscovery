@@ -82,7 +82,7 @@ namespace NetworkDiscovery
         {
             BroadcastTalker talker = new BroadcastTalker(_port);
             Message reply = new Message(type: "discovered", sourceID:_ID, body: _replyMessage);
-            talker.say(reply.ToString());
+            talker.Say(reply.ToString());
             talker = null;
         }
 
@@ -97,7 +97,7 @@ namespace NetworkDiscovery
             BroadcastTalker talker = new BroadcastTalker(_port);
             Message reply = new Message(type: "discover", sourceID: _ID, body: "hi");
 
-            talker.say(reply.ToString());
+            talker.Say(reply.ToString());
             talker = null;            
         }
 

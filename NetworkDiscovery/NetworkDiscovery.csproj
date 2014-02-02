@@ -42,12 +42,14 @@
   <ItemGroup>
     <Compile Include="Discoverer.cs" />
     <Compile Include="IPHelper.cs" />
+    <Compile Include="Listener.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Talker.cs" />
     <Compile Include="UDPInfo.cs" />
     <Compile Include="BroadcastListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
