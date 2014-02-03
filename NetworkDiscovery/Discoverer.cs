@@ -88,7 +88,7 @@ namespace NetworkDiscovery
 
         private int readDefaultPortNumber()
         {
-           return Properties.Settings.Default.DefaultPort;
+           return Properties.Settings.Default.DefaultBroadcastPort;
         }
 
         public void Discover(Action<string> callback)
@@ -106,8 +106,6 @@ namespace NetworkDiscovery
             _replyMessage = replyMessage;
             startListener();
         }
-
-        
 
     }
 }

@@ -22,12 +22,22 @@ namespace NetworkDiscovery
         override protected bool initializeClient()
         {
             bool success = false;
+            //Console.WriteLine("broadcastListener.address: " + this.Address);
             if (_port != 0 && _address != null)
             {
-                _client = new UdpClient();
-                _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                _client.Client.Bind(this.EndPoint);
-                success = true;
+                try
+                {
+                    _client = new UdpClient();
+                    _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                    _client.Client.Bind(this.EndPoint);
+                    success = true;
+                    //Console.WriteLine("Worked: " + _port.ToString());
+                }
+                catch (Exception e)
+                {
+                    //Console.WriteLine("error: " + e.Message);
+                }
+                
             }
 
             return success;

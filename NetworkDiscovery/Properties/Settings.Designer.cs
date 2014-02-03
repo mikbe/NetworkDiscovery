@@ -26,12 +26,48 @@ namespace NetworkDiscovery.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("12399")]
-        public int DefaultPort {
+        public int DefaultBroadcastPort {
             get {
-                return ((int)(this["DefaultPort"]));
+                return ((int)(this["DefaultBroadcastPort"]));
             }
             set {
-                this["DefaultPort"] = value;
+                this["DefaultBroadcastPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("239.224.78.1")]
+        public string DefaultMulticastIP {
+            get {
+                return ((string)(this["DefaultMulticastIP"]));
+            }
+            set {
+                this["DefaultMulticastIP"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2")]
+        public int DefaultMulticastTTL {
+            get {
+                return ((int)(this["DefaultMulticastTTL"]));
+            }
+            set {
+                this["DefaultMulticastTTL"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12301")]
+        public int DefauiltMulticastPort {
+            get {
+                return ((int)(this["DefauiltMulticastPort"]));
+            }
+            set {
+                this["DefauiltMulticastPort"] = value;
             }
         }
     }

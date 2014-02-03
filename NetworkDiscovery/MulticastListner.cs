@@ -5,22 +5,61 @@ using System.Text;
 
 namespace NetworkDiscovery
 {
-
-    public abstract class Listener : UDPInfo
+    public class MulticastListner : MulticastInfo
     {
         public delegate void ReceivedDataEventHandler(string Data);
         public event ReceivedDataEventHandler ReceivedData;
 
-        protected UdpClient _client = null;
+        private UdpClient _client = null;
+        int _ttl;
 
-        public Listener(int port, string address)
-            : base(port: port, address: address)
+        public MulticastListner(int port = 0, string multicastAddressString = "", int TTL = 0) : base(port: port, multicastAddressString: multicastAddressString)
         {
+            if (TTL == 0)
+            {
+                _ttl = Properties.Settings.Default.DefaultMulticastTTL;
+            }
+            else
+            {
+                _ttl = TTL;
+            }
+
+            if (multicastAddressString == "")
+            {
+                _multicastAddressString = Properties.Settings.Default.DefaultMulticastIP;
+            }
+
+            if (port == 0)
+            {
+                _port = Properties.Settings.Default.DefauiltMulticastPort;
+            }
+
         }
 
-        ~Listener()
+        ~MulticastListner()
         {
             StopListening();
+        }
+
+        private bool initializeClient()
+        {
+            Console.WriteLine("initialize");
+
+            try
+            {
+                _client = new UdpClient();
+                _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+                _client.JoinMulticastGroup(MulticastIpAddress);
+                _client.Client.Bind(BroadcastEndPoint);
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("error: " + e.Message);
+            }
+ 
+            return false;
         }
 
         public void StopListening()
@@ -39,6 +78,8 @@ namespace NetworkDiscovery
             StopListening();
             _active = initializeClient();
             if (!_active) return;
+            
+            Console.WriteLine("listening");
 
             attachCallback(callback);
             beginReceive();
@@ -47,15 +88,13 @@ namespace NetworkDiscovery
         private void attachCallback(Action<string> callback)
         {
             if (callback == null) return;
-            ReceivedData += new Listener.ReceivedDataEventHandler(callback);
+            ReceivedData += new MulticastListner.ReceivedDataEventHandler(callback);
         }
 
         private void disconnectCallbacks()
         {
             ReceivedData = null;
         }
-
-        abstract protected bool initializeClient();
 
         private void beginReceive()
         {
@@ -70,9 +109,9 @@ namespace NetworkDiscovery
             // from it and trapping the error.
             try
             {
-                IPEndPoint endPoint = this.EndPoint;
+                IPEndPoint endPoint = BroadcastEndPoint;
                 Byte[] receiveData = _client.EndReceive(result, ref endPoint);
-                string receiveString = Encoding.ASCII.GetString(receiveData);
+                string receiveString = Encoder.DecodeMessage(receiveData);
 
                 ReceivedData(receiveString);
 
@@ -94,4 +133,5 @@ namespace NetworkDiscovery
 
 
     }
+
 }

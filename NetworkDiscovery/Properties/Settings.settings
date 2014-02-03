@@ -2,8 +2,17 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NetworkDiscovery.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="DefaultPort" Type="System.Int32" Scope="User">
+    <Setting Name="DefaultBroadcastPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">12399</Value>
+    </Setting>
+    <Setting Name="DefaultMulticastIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">239.224.78.1</Value>
+    </Setting>
+    <Setting Name="DefaultMulticastTTL" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="DefauiltMulticastPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">12301</Value>
     </Setting>
   </Settings>
 </SettingsFile>

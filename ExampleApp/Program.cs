@@ -11,12 +11,57 @@ namespace ExampleApp
     {
         static void Main(string[] args)
         {
-            ListenerTalkerDemo();
-            DiscovererDemo();
+            //ListenerTalkerDemo();
+            //DiscovererDemo();
+            //PortScannerDemo();
+
+            MulticastDemo();
 
             Thread.Sleep(100);
             Console.WriteLine("Press [Enter] to end.");
             Console.ReadLine();
+        }
+
+        static void MulticastDemo()
+        {
+            MulticastListner listener = new MulticastListner();
+            listener.Listen(listener_ReceivedData);
+
+            MulticastTalker talker = new MulticastTalker();
+            talker.Say("Multicast send");
+            talker.Say("Say again.");
+        }
+
+        static void PortScannerDemo()
+        {
+            int port = 12399;
+
+            Console.WriteLine("locking port: " + port.ToString());
+            SingleListener singleListener = LockOpenPort(port: port);
+            ShowOpenPorts(startPort: port);
+            singleListener.StopListening();
+            Console.WriteLine("Unlocked port: " + port.ToString());
+
+            Console.WriteLine("Open mulituse port: " + port.ToString());
+            BroadcastListener broadcastListener = new BroadcastListener(port: port);
+
+            ShowOpenPorts(startPort: port);
+            broadcastListener.StopListening();
+   
+        }
+        
+        static SingleListener LockOpenPort(int port)
+        {
+            SingleListener listener = new SingleListener(port: port);
+            listener.Listen(null);
+            return listener;
+        }
+
+        static void ShowOpenPorts(int startPort)
+        {
+            Console.WriteLine("Testing ports: " + startPort.ToString());
+            int openPort = PortScanner.FindOpenPort(startPort, 10);
+            Console.WriteLine("open port: " + openPort.ToString());
         }
 
         static void DiscovererDemo()
@@ -28,6 +73,7 @@ namespace ExampleApp
             Console.WriteLine("2.id: " + discoverer2.ID);
 
             discoverer1.PublishSelf("Found:" + discoverer1.ID);
+
             discoverer2.PublishSelf("Found:" + discoverer2.ID);
 
             // This should only respond once.

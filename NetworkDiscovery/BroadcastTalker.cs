@@ -18,6 +18,7 @@ namespace NetworkDiscovery
                 SocketType.Dgram,
                 ProtocolType.Udp
             );
+
             socket.EnableBroadcast = true;
             return socket;
         }
