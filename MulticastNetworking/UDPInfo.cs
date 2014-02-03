@@ -4,13 +4,13 @@ using System.Net.Sockets;
 
 namespace MulticastNetworking
 {
-    public class MulticastInfo
+    public class UDPInfo
     {
         protected int       _port;
         protected string    _multicastAddressString;
         protected bool      _active;
 
-        public MulticastInfo(int port, string multicastAddressString)
+        public UDPInfo(int port, string multicastAddressString)
         {
             _port = port;
             _multicastAddressString = multicastAddressString;

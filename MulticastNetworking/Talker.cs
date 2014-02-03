@@ -6,12 +6,12 @@ using System.Text;
 namespace MulticastNetworking
 {
 
-    public class MulticastTalker : MulticastInfo
+    public class Talker : UDPInfo
     {
 
         private int _ttl;
 
-        public MulticastTalker(int port = 0, string address = "", int TTL = 0)
+        public Talker(int port = 0, string address = "", int TTL = 0)
             : base(port: port, multicastAddressString: address)
         {
             if (TTL == 0)

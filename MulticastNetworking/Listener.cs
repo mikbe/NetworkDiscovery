@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MulticastNetworking
 {
-    public class MulticastListner : MulticastInfo
+    public class Listener : UDPInfo
     {
         public delegate void ReceivedDataEventHandler(string Data);
         public event ReceivedDataEventHandler ReceivedData;
@@ -13,7 +13,7 @@ namespace MulticastNetworking
         private UdpClient _client = null;
         int _ttl;
 
-        public MulticastListner(int port = 0, string multicastAddressString = "", int TTL = 0) : base(port: port, multicastAddressString: multicastAddressString)
+        public Listener(int port = 0, string multicastAddressString = "", int TTL = 0) : base(port: port, multicastAddressString: multicastAddressString)
         {
             if (TTL == 0)
             {
@@ -36,28 +36,17 @@ namespace MulticastNetworking
 
         }
 
-        ~MulticastListner()
+        ~Listener()
         {
             StopListening();
         }
 
-        private bool initializeClient()
+        private void initializeClient()
         {
-            try
-            {
-                _client = new UdpClient();
-                _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
-                _client.JoinMulticastGroup(MulticastIpAddress);
-                _client.Client.Bind(BroadcastEndPoint);
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                //Console.WriteLine("error: " + e.Message);
-            }
- 
-            return false;
+            _client = new UdpClient();
+            _client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+            _client.JoinMulticastGroup(MulticastIpAddress);
+            _client.Client.Bind(BroadcastEndPoint);
         }
 
         public void StopListening()
@@ -78,17 +67,16 @@ namespace MulticastNetworking
         public void Listen(Action<string> callback)
         {
             StopListening();
-            _active = initializeClient();
-            if (!_active) return;
-
+            initializeClient();
             attachCallback(callback);
             beginReceive();
+            _active = true;
         }
 
         private void attachCallback(Action<string> callback)
         {
             if (callback == null) return;
-            ReceivedData += new MulticastListner.ReceivedDataEventHandler(callback);
+            ReceivedData += new Listener.ReceivedDataEventHandler(callback);
         }
 
         private void disconnectCallbacks()
