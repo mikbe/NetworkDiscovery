@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using NetworkDiscovery;
+using MulticastNetworking;
+
 using System.Threading;
 
 namespace ExampleApp
@@ -24,12 +26,17 @@ namespace ExampleApp
 
         static void MulticastDemo()
         {
-            MulticastListner listener = new MulticastListner();
-            listener.Listen(listener_ReceivedData);
+            MulticastListner listener1 = new MulticastListner();
+            listener1.Listen(listener_ReceivedData);
+
+            MulticastListner listener2 = new MulticastListner();
+            listener2.Listen(listener_ReceivedData);
 
             MulticastTalker talker = new MulticastTalker();
             talker.Say("Multicast send");
             talker.Say("Say again.");
+
+            Thread.Sleep(100);
         }
 
         static void PortScannerDemo()

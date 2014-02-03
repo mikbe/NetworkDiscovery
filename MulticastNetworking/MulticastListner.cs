@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace NetworkDiscovery
+namespace MulticastNetworking
 {
     public class MulticastListner : MulticastInfo
     {
@@ -17,7 +17,7 @@ namespace NetworkDiscovery
         {
             if (TTL == 0)
             {
-                _ttl = Properties.Settings.Default.DefaultMulticastTTL;
+                _ttl = Properties.Settings.Default.TTL;
             }
             else
             {
@@ -26,12 +26,12 @@ namespace NetworkDiscovery
 
             if (multicastAddressString == "")
             {
-                _multicastAddressString = Properties.Settings.Default.DefaultMulticastIP;
+                _multicastAddressString = Properties.Settings.Default.MulticastIP;
             }
 
             if (port == 0)
             {
-                _port = Properties.Settings.Default.DefauiltMulticastPort;
+                _port = Properties.Settings.Default.Port;
             }
 
         }
@@ -43,8 +43,6 @@ namespace NetworkDiscovery
 
         private bool initializeClient()
         {
-            Console.WriteLine("initialize");
-
             try
             {
                 _client = new UdpClient();
@@ -56,7 +54,7 @@ namespace NetworkDiscovery
             }
             catch (Exception e)
             {
-                Console.WriteLine("error: " + e.Message);
+                //Console.WriteLine("error: " + e.Message);
             }
  
             return false;
@@ -73,13 +71,15 @@ namespace NetworkDiscovery
             Active = false;
         }
 
+        /// <summary>
+        /// Starts the listener in a non-blocking thread.
+        /// </summary>
+        /// <param name="callback"></param>
         public void Listen(Action<string> callback)
         {
             StopListening();
             _active = initializeClient();
             if (!_active) return;
-            
-            Console.WriteLine("listening");
 
             attachCallback(callback);
             beginReceive();

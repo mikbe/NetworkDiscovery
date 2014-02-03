@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{557CC937-BE2A-44F9-AA07-216E38CCD94E}</ProjectGuid>
+    <ProjectGuid>{B1007312-76DC-45D4-96FC-A8F7271E41E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>NetworkDiscovery</RootNamespace>
-    <AssemblyName>NetworkDiscovery</AssemblyName>
+    <RootNamespace>MulticastNetworking</RootNamespace>
+    <AssemblyName>MulticastNetworking</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,24 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Encoder.cs" />
-    <Compile Include="UInfo.cs" />
-    <Compile Include="Discoverer.cs" />
-    <Compile Include="Listener.cs" />
-    <Compile Include="Message.cs" />
-    <Compile Include="PortScanner.cs" />
+    <Compile Include="MulticastDiscoverer.cs" />
+    <Compile Include="MulticastInfo.cs" />
+    <Compile Include="MulticastListner.cs" />
+    <Compile Include="MulticastTalker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SingleListener.cs" />
-    <Compile Include="Talker.cs" />
-    <Compile Include="BroadcastListener.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BroadcastTalker.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

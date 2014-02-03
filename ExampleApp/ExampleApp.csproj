@@ -48,6 +48,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MulticastNetworking\MulticastNetworking.csproj">
+      <Project>{B1007312-76DC-45D4-96FC-A8F7271E41E7}</Project>
+      <Name>MulticastNetworking</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetworkDiscovery\NetworkDiscovery.csproj">
       <Project>{557CC937-BE2A-44F9-AA07-216E38CCD94E}</Project>
       <Name>NetworkDiscovery</Name>

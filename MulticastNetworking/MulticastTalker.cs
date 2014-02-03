@@ -3,7 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace NetworkDiscovery
+namespace MulticastNetworking
 {
 
     public class MulticastTalker : MulticastInfo
@@ -16,7 +16,7 @@ namespace NetworkDiscovery
         {
             if (TTL == 0)
             {
-                _ttl = Properties.Settings.Default.DefaultMulticastTTL;
+                _ttl = Properties.Settings.Default.TTL;
             }
             else
             {
@@ -25,12 +25,12 @@ namespace NetworkDiscovery
 
             if (address == "")
             {
-                _multicastAddressString = Properties.Settings.Default.DefaultMulticastIP;
+                _multicastAddressString = Properties.Settings.Default.MulticastIP;
             }
             
             if (port == 0)
             {
-                _port = Properties.Settings.Default.DefauiltMulticastPort;
+                _port = Properties.Settings.Default.Port;
             }
         }
 

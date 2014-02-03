@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Sockets;
 
-namespace NetworkDiscovery
+namespace MulticastNetworking
 {
     public class MulticastInfo
     {
